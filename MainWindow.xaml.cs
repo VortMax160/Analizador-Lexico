@@ -73,13 +73,8 @@ namespace AnalizadorLexico
 
             if (char.IsWhiteSpace(ch))
             {
-                var sb = new StringBuilder();
-                while (_pos < _src.Length && char.IsWhiteSpace(Cur()))
-                {
-                    sb.Append(Cur());
-                    Adv();
-                }
-                return new Token(TipoToken.Blanco, sb.ToString(), l, c);
+                Adv();
+                return new Token(TipoToken.Blanco, ch.ToString(), l, c);
             }
 
             if (ch == '"')
@@ -274,7 +269,7 @@ namespace AnalizadorLexico
         private void Analizar()
         {
             var textRange = new TextRange(rtbCodigo.Document.ContentStart, rtbCodigo.Document.ContentEnd);
-            string src = textRange.Text;
+            string src = textRange.Text.Replace("\r", "").TrimEnd('\n');
 
             if (string.IsNullOrWhiteSpace(src))
                 return;
@@ -295,7 +290,7 @@ namespace AnalizadorLexico
                 var item = new TokenItem
                 {
                     Numero = idx,
-                    Lexema = t.Lexema,
+                    Lexema = t.Tipo == TipoToken.Blanco ? t.Lexema.Replace("\t", "\\t").Replace("\n", "\\n") : t.Lexema,
                     Tipo = Etiquetas[t.Tipo],
                     Linea = t.Linea,
                     Columna = t.Columna,
