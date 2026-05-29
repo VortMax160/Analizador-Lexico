@@ -38,7 +38,7 @@ namespace AnalizadorLexico
         public string Tipo { get; set; }
         public int Linea { get; set; }
         public int Columna { get; set; }
-        public Brush Color { get; set; }
+        public Brush TipoColor { get; set; }
         public bool EsError { get; set; }
     }
 
@@ -265,7 +265,6 @@ namespace AnalizadorLexico
             var paragraph = new Paragraph(new Run(Ejemplos[i]));
             doc.Blocks.Add(paragraph);
             rtbCodigo.Document = doc;
-            Analizar();
         }
 
         private void Analizar()
@@ -280,36 +279,23 @@ namespace AnalizadorLexico
             var noBlk = tokens.FindAll(t => t.Tipo != TipoToken.Blanco);
             int errs = tokens.FindAll(t => t.Tipo == TipoToken.ErrorLexico).Count;
 
-            txtTotal.Text = noBlk.Count.ToString();
+            txtTotal.Text = tokens.Count.ToString();
             txtReservadas.Text = tokens.FindAll(t => t.Tipo == TipoToken.PalabraReservada).Count.ToString();
             txtIdentificadores.Text = tokens.FindAll(t => t.Tipo == TipoToken.Identificador).Count.ToString();
             txtErrores.Text = errs.ToString();
-
-            rtbColoreado.Document.Blocks.Clear();
-            var coloredParagraph = new Paragraph();
-            foreach (var t in tokens)
-            {
-                var run = new Run(t.Lexema);
-                run.Foreground = new SolidColorBrush(Colores[t.Tipo]);
-                coloredParagraph.Inlines.Add(run);
-            }
-            rtbColoreado.Document.Blocks.Add(coloredParagraph);
-            txtPlaceholder.Visibility = Visibility.Collapsed;
 
             _tokens.Clear();
             int idx = 1;
             foreach (var t in tokens)
             {
-                if (t.Tipo == TipoToken.Blanco) continue;
-
                 var item = new TokenItem
                 {
                     Numero = idx,
-                    Lexema = t.Lexema.Replace("\n", "↵").Replace("\t", "→"),
+                    Lexema = t.Lexema,
                     Tipo = Etiquetas[t.Tipo],
                     Linea = t.Linea,
                     Columna = t.Columna,
-                    Color = new SolidColorBrush(Colores[t.Tipo]),
+                    TipoColor = new SolidColorBrush(Colores[t.Tipo]),
                     EsError = t.Tipo == TipoToken.ErrorLexico
                 };
                 _tokens.Add(item);
@@ -326,15 +312,13 @@ namespace AnalizadorLexico
             else
             {
                 txtStatus.Foreground = new SolidColorBrush(Color.FromRgb(15, 110, 86));
-                txtStatus.Text = $"  ✓  Análisis completado — {noBlk.Count} tokens reconocidos sin errores";
+                txtStatus.Text = $"  ✓  Análisis completado — {tokens.Count} tokens reconocidos sin errores";
             }
         }
 
         private void Limpiar()
         {
             rtbCodigo.Document.Blocks.Clear();
-            rtbColoreado.Document.Blocks.Clear();
-            txtPlaceholder.Visibility = Visibility.Visible;
 
             _tokens.Clear();
             dgTokens.Items.Refresh();

@@ -97,78 +97,45 @@
 
         <!-- CONTENIDO PRINCIPAL -->
         <Grid Grid.Row="2" Margin="8">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
-            <!-- Editores -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- Código fuente -->
-                <Border Grid.Column="0" Background="White" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="4" Margin="4">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Border Grid.Row="0" Background="#F5F5F3" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1">
-                            <TextBlock Text="  Código fuente" FontSize="11" Foreground="{StaticResource ForegroundLight}" VerticalAlignment="Center"/>
-                        </Border>
-                        <RichTextBox x:Name="rtbCodigo" Grid.Row="1"
-                                     FontFamily="Consolas" FontSize="13"
-                                     Background="#FCFCFB" Foreground="#2C2C2A"
-                                     AcceptsTab="True" AcceptsReturn="True"
-                                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                                     BorderThickness="0" Padding="8"/>
-                    </Grid>
-                </Border>
-
-                <!-- Vista coloreada -->
-                <Border Grid.Column="1" Background="White" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="4" Margin="4">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Border Grid.Row="0" Background="#F5F5F3" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1">
-                            <TextBlock Text="  Vista coloreada por tipo de token" FontSize="11" Foreground="{StaticResource ForegroundLight}" VerticalAlignment="Center"/>
-                        </Border>
-                        <RichTextBox x:Name="rtbColoreado" Grid.Row="1"
-                                     FontFamily="Consolas" FontSize="13"
-                                     Background="#FCFCFB"
-                                     IsReadOnly="True"
-                                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                                     BorderThickness="0" Padding="8">
-                            <RichTextBox.Resources>
-                                <Style TargetType="Paragraph">
-                                    <Setter Property="Margin" Value="0"/>
-                                </Style>
-                            </RichTextBox.Resources>
-                        </RichTextBox>
-                        <TextBlock x:Name="txtPlaceholder" Grid.Row="1"
-                                   Text="Presiona Analizar para ver el código con colores..."
-                                   FontFamily="Consolas" FontSize="13"
-                                   Foreground="{StaticResource ForegroundLight}"
-                                   Margin="12,12,0,0"
-                                   Visibility="Visible"/>
-                    </Grid>
-                </Border>
-            </Grid>
-
-            <!-- Tabla de tokens -->
-            <Border Grid.Row="1" Background="White" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="4" Margin="4">
+            <!-- Código fuente -->
+            <Border Grid.Column="0" Background="White" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="4" Margin="4">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" Background="#F5F5F3" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1">
-                        <TextBlock Text="  Tabla de tokens (los blancos se omiten)" FontSize="11" Foreground="{StaticResource ForegroundLight}" VerticalAlignment="Center"/>
+                        <TextBlock Text="  Código fuente" FontSize="11" Foreground="{StaticResource ForegroundLight}" VerticalAlignment="Center"/>
+                    </Border>
+                    <RichTextBox x:Name="rtbCodigo" Grid.Row="1"
+                                 FontFamily="Consolas" FontSize="13"
+                                 Background="#FCFCFB" Foreground="#2C2C2A"
+                                 AcceptsTab="True" AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                 BorderThickness="0" Padding="8">
+                        <RichTextBox.Resources>
+                            <Style TargetType="Paragraph">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
+                </Grid>
+            </Border>
+
+            <!-- Tabla de tokens -->
+            <Border Grid.Column="1" Background="White" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="4" Margin="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Background="#F5F5F3" BorderBrush="{StaticResource BorderColor}" BorderThickness="0,0,0,1">
+                        <TextBlock Text="  Tabla de tokens" FontSize="11" Foreground="{StaticResource ForegroundLight}" VerticalAlignment="Center"/>
                     </Border>
                     <DataGrid x:Name="dgTokens" Grid.Row="1"
                               AutoGenerateColumns="False"
@@ -187,65 +154,38 @@
                             <DataGridTextColumn Header="#" Width="50" Binding="{Binding Numero}" IsReadOnly="True">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="Background" Value="#F5F5F3"/>
-                                        <Setter Property="Foreground" Value="{StaticResource ForegroundLight}"/>
-                                        <Setter Property="FontWeight" Value="Normal"/>
-                                        <Setter Property="Padding" Value="8,4"/>
+                                        <Setter Property="Background" Value="#2C2C2A"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                        <Setter Property="Padding" Value="10,6"/>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Lexema" Width="220" Binding="{Binding Lexema}" IsReadOnly="True">
+                            <DataGridTextColumn Header="Lexema" Width="*" Binding="{Binding Lexema}" IsReadOnly="True">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="Background" Value="#F5F5F3"/>
-                                        <Setter Property="Foreground" Value="{StaticResource ForegroundLight}"/>
-                                        <Setter Property="FontWeight" Value="Normal"/>
-                                        <Setter Property="Padding" Value="8,4"/>
+                                        <Setter Property="Background" Value="#2C2C2A"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                        <Setter Property="Padding" Value="10,6"/>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Tipo" Width="180" Binding="{Binding Tipo}" IsReadOnly="True">
-                                <DataGridTextColumn.HeaderStyle>
+                            <DataGridTemplateColumn Header="Tipo" Width="180">
+                                <DataGridTemplateColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="Background" Value="#F5F5F3"/>
-                                        <Setter Property="Foreground" Value="{StaticResource ForegroundLight}"/>
-                                        <Setter Property="FontWeight" Value="Normal"/>
-                                        <Setter Property="Padding" Value="8,4"/>
+                                        <Setter Property="Background" Value="#2C2C2A"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                        <Setter Property="Padding" Value="10,6"/>
                                     </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Línea" Width="70" Binding="{Binding Linea}" IsReadOnly="True">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="Background" Value="#F5F5F3"/>
-                                        <Setter Property="Foreground" Value="{StaticResource ForegroundLight}"/>
-                                        <Setter Property="FontWeight" Value="Normal"/>
-                                        <Setter Property="Padding" Value="8,4"/>
-                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Columna" Width="80" Binding="{Binding Columna}" IsReadOnly="True">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="Background" Value="#F5F5F3"/>
-                                        <Setter Property="Foreground" Value="{StaticResource ForegroundLight}"/>
-                                        <Setter Property="FontWeight" Value="Normal"/>
-                                        <Setter Property="Padding" Value="8,4"/>
-                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
+                                </DataGridTemplateColumn.HeaderStyle>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Tipo}" Foreground="{Binding TipoColor}" FontWeight="SemiBold"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
