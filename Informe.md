@@ -44,7 +44,7 @@ El alfabeto de entrada está compuesto por caracteres ASCII, incluyendo:
 | # | Token | Descripción | Ejemplo |
 |---|---|---|---|
 | 1 | Palabra reservada | Palabras con significado propio en el lenguaje | `if`, `else`, `const`, `var`, `bool`, `true`, `false`, `print`, `void`, `return`, `public` |
-| 2 | Identificador | Nombres definidos por el usuario (solo ASCII) | `x`, `miVar`, `contador`, `miFuncion` |
+| 2 | Identificador | Nombres definidos por el usuario (solo ASCII) | `x`, `miVar`, `contador`, `miFuncion`, `_a` |
 | 3 | Constante numérica | Valores numéricos enteros o decimales | `1`, `2.5`, `10.0` |
 | 4 | Cadena | Texto literal delimitado por comillas dobles | `"Hola"`, `""` |
 | 5 | Operador aritmético | Operaciones matemáticas | `+`, `-`, `*`, `/`, `^` |
